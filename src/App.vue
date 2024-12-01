@@ -22,14 +22,16 @@ export default {
     };
   },
   computed: {
-    thumbPosition() {
+    thumbRatio() {
       const thumbWrapperWidth = this.$refs.thumb?.parentElement.offsetWidth;
       const interceptorWidth = this.$refs.interceptor?.offsetWidth;
       const thumbWidth = this.$refs.thumb?.offsetWidth;
       const ladderWidthDiff =
         this.$options.CONFIG.ladderWidth - interceptorWidth;
-      const thumbRatio = (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
-      return Math.floor(this.leftScroll * thumbRatio);
+      return (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
+    },
+    thumbPosition() {
+      return Math.floor(this.leftScroll * this.thumbRatio);
     },
   },
   methods: {
@@ -51,20 +53,21 @@ export default {
           ? `95%`
           : `${this.step + 1}%`;
     },
-    sync() {
-      const scrollLeft = this.$refs.interceptor.scrollLeft;
-      if (scrollLeft !== this.leftScroll) {
-        this.$refs.wrapper.scrollLeft = scrollLeft;
-        this.$refs.wrapper.scrollTop =
-          this.$options.CONFIG.ladderWidth - this.offset - scrollLeft;
-        this.leftScroll = scrollLeft;
-      }
-      this.isAnimationFrameScheduled = false;
-    },
     updateScroll() {
+      const sync = () => {
+        const scrollLeft = this.$refs.interceptor.scrollLeft;
+        if (scrollLeft !== this.leftScroll) {
+          this.$refs.wrapper.scrollLeft = scrollLeft;
+          this.$refs.wrapper.scrollTop =
+            this.$options.CONFIG.ladderWidth - this.offset - scrollLeft;
+          this.leftScroll = scrollLeft;
+        }
+        this.isAnimationFrameScheduled = false;
+      };
+
       if (!this.isAnimationFrameScheduled) {
         this.isAnimationFrameScheduled = true;
-        requestAnimationFrame(this.sync);
+        requestAnimationFrame(sync);
       }
     },
     initWrapperScrollPosition() {
