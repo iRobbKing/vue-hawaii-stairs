@@ -29,7 +29,6 @@ export default {
       const ladderWidthDiff =
         this.$options.CONFIG.ladderWidth - interceptorWidth;
       const thumbRatio = (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
-      console.log("asdfasdf", this.leftScroll, thumbRatio);
       return Math.floor(this.leftScroll * thumbRatio);
     },
   },
