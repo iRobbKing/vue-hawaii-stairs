@@ -19,22 +19,23 @@ export default {
       isAnimationFrameScheduled: false,
       leftScroll: 0,
       offset: 0,
+      thumbRatio: 0,
     };
   },
   computed: {
-    thumbRatio() {
-      const thumbWrapperWidth = this.$refs.thumb?.parentElement.offsetWidth;
-      const interceptorWidth = this.$refs.interceptor?.offsetWidth;
-      const thumbWidth = this.$refs.thumb?.offsetWidth;
-      const ladderWidthDiff =
-        this.$options.CONFIG.ladderWidth - interceptorWidth;
-      return (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
-    },
     thumbPosition() {
       return Math.floor(this.leftScroll * this.thumbRatio);
     },
   },
   methods: {
+    initThumbRatio() {
+      const thumbWrapperWidth = this.$refs.thumb?.parentElement.offsetWidth;
+      const interceptorWidth = this.$refs.interceptor?.offsetWidth;
+      const thumbWidth = this.$refs.thumb?.offsetWidth;
+      const ladderWidthDiff =
+        this.$options.CONFIG.ladderWidth - interceptorWidth;
+      this.thumbRation = (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
+    },
     initScrollingController() {
       const interceptor = document.querySelector(".interceptor");
       const currentLocation = document.querySelector(
@@ -87,6 +88,7 @@ export default {
     },
   },
   mounted() {
+    this.initThumbRatio();
     this.initWrapperScrollPosition();
     this.initScrollingController();
   },
