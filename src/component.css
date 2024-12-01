@@ -1,0 +1,59 @@
+.interceptor,
+.wrapper {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.wrapper {
+  will-change: scroll-top scroll-left;
+}
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+.checkpoints {
+  font-size: 20px;
+  font-weight: 600;
+  color: #b4b4c8;
+  text-align: center;
+  font-family: "PT Sans Caption", sans-serif;
+}
+.checkpoint {
+  position: absolute;
+  width: 60px;
+}
+.checkpoint--flag {
+  display: flex;
+  justify-content: center;
+  fill: #b4b4c8;
+}
+.checkpoint--completed {
+  color: #f1a38c;
+  fill: #f1a38c;
+}
+.checkpoint--current {
+  color: #e8653f;
+  fill: #e8653f;
+  font-weight: 700;
+}
+.corner-gradient {
+  width: 50%;
+  height: 30px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 30%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.bottom-gradient {
+  width: 100%;
+  height: 30px;
+  background-image: linear-gradient(
+    to top,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 255, 255) 15%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.scrollbar-thumb {
+  will-change: transform;
+}
