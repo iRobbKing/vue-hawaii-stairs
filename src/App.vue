@@ -20,12 +20,8 @@ export default {
       leftScroll: 0,
       offset: 0,
       thumbRatio: 0,
+      thumbPosition: 0,
     };
-  },
-  computed: {
-    thumbPosition() {
-      return Math.floor(this.leftScroll * this.thumbRatio);
-    },
   },
   methods: {
     initThumbRatio() {
@@ -62,7 +58,7 @@ export default {
           this.$refs.wrapper.scrollLeft = scrollLeft;
           this.$refs.wrapper.scrollTop =
             this.$options.CONFIG.ladderWidth - this.offset - scrollLeft;
-          this.leftScroll = scrollLeft;
+          this.thumbPosition = Math.floor(scrollLeft * this.thumbRatio);
         }
         this.isAnimationFrameScheduled = false;
       };
