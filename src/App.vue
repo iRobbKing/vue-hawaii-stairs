@@ -52,21 +52,20 @@ export default {
           ? `95%`
           : `${this.step + 1}%`;
     },
+    sync() {
+      const scrollLeft = this.$refs.interceptor.scrollLeft;
+      if (scrollLeft !== this.leftScroll) {
+        this.$refs.wrapper.scrollLeft = scrollLeft;
+        this.$refs.wrapper.scrollTop =
+          this.$options.CONFIG.ladderWidth - this.offset - scrollLeft;
+        this.leftScroll = scrollLeft;
+      }
+      this.isAnimationFrameScheduled = false;
+    },
     updateScroll() {
-      const sync = () => {
-        const scrollLeft = this.$refs.interceptor.scrollLeft;
-        if (scrollLeft !== this.leftScroll) {
-          this.$refs.wrapper.scrollLeft = scrollLeft;
-          this.$refs.wrapper.scrollTop =
-            this.$options.CONFIG.ladderWidth - this.offset - scrollLeft;
-          this.leftScroll = scrollLeft;
-        }
-        this.isAnimationFrameScheduled = false;
-      };
-
       if (!this.isAnimationFrameScheduled) {
         this.isAnimationFrameScheduled = true;
-        requestAnimationFrame(sync);
+        requestAnimationFrame(this.sync);
       }
     },
     initWrapperScrollPosition() {
