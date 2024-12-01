@@ -34,7 +34,8 @@ export default {
       const thumbWidth = this.$refs.thumb?.offsetWidth;
       const ladderWidthDiff =
         this.$options.CONFIG.ladderWidth - interceptorWidth;
-      this.thumbRation = (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
+      console.log((thumbWrapperWidth - thumbWidth) / ladderWidthDiff);
+      this.thumbRatio = (thumbWrapperWidth - thumbWidth) / ladderWidthDiff;
     },
     initScrollingController() {
       const interceptor = document.querySelector(".interceptor");
